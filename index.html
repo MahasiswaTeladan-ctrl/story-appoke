@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Submission Proyek Awal</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#4a90e2" />
-  <base href="/story-appoke/">
-<script defer src="/story-appoke/bundle.js"></script></head>
-<body>
-    <a href="#main-content" class="skip-to-content">Skip to content</a>
-    <nav>
-        <a href="#/">Beranda</a> |
-        <a href="#/add">Tambah Cerita</a>
-    </nav>
-    <main id="main-content" tabindex="-1"></main>
-    <script>
-      if ('serviceWorker' in navigator) {
+<!doctype html><html lang="id"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Submission Proyek Awal</title><link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/><link rel="stylesheet" href="styles/main.css"><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#4a90e2"/><base href="/story-appoke/"><script defer="defer" src="/story-appoke/bundle.js"></script></head><body><a href="#main-content" class="skip-to-content">Skip to content</a><nav><a href="#/">Beranda</a> | <a href="#/add">Tambah Cerita</a></nav><main id="main-content" tabindex="-1"></main><script>if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
           navigator.serviceWorker.register('service-worker.js')
             .then(function(registration) {
@@ -27,7 +7,4 @@
               console.log('ServiceWorker registration failed: ', err);
             });
         });
-      }
-    </script>
-</body>
-</html>
+      }</script></body></html>
