@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "homepage": "https://emonbimantara.github.io/storyApp_3/",
+  "homepage": "https://MahasiswaTeladan-ctrl.github.io/story-appoke/",
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",

@@ -23,7 +23,6 @@ const OfflineStories = {
     if (!navigator.onLine) {
       offlineMsg.style.display = 'block';
     }
-    // Load offline stories
     const stories = await StoryAPI.getOfflineStories();
     
     if (stories.length === 0) {
@@ -31,7 +30,6 @@ const OfflineStories = {
       return;
     }
 
-    // Render stories
     offlineStoriesList.innerHTML = stories.map(story => `
       <div class="story-item offline-story" data-id="${story.id}">
         <img src="${story.photoUrl || story.photo}" alt="${story.description}" class="story-item__image" onerror="this.onerror=null;this.src='icons/icon-192x192.png'">
@@ -46,18 +44,15 @@ const OfflineStories = {
       </div>
     `).join('');
 
-    // Add event listeners for delete buttons
     const deleteButtons = document.querySelectorAll('.delete-offline-story');
     deleteButtons.forEach(button => {
       button.addEventListener('click', async (e) => {
         const storyId = e.target.dataset.id;
         if (confirm('Are you sure you want to delete this offline story?')) {
           await StoryAPI.deleteOfflineStory(storyId);
-          // Remove the story element from DOM
           const storyElement = document.querySelector(`.offline-story[data-id="${storyId}"]`);
           storyElement.remove();
           
-          // If no stories left, show empty message
           if (document.querySelectorAll('.offline-story').length === 0) {
             offlineStoriesList.innerHTML = '<p class="empty-message">No offline stories found</p>';
           }
@@ -65,7 +60,6 @@ const OfflineStories = {
       });
     });
 
-    // Add event listener for clear all button
     clearButton.addEventListener('click', async () => {
       if (confirm('Are you sure you want to delete all offline stories?')) {
         await StoryAPI.clearOfflineStories();

@@ -404,3 +404,43 @@ nav ul li a:hover {
   background: #f8f9fa;
   border-radius: 8px;
 }
+
+.notification-settings {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification-settings h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.notification-settings .button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.notification-settings .button:hover {
+  background-color: #357abd;
+}
+
+.notification-settings .button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#notification-status {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}

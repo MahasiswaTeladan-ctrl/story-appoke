@@ -1,10 +1,17 @@
 import HomePagePresenter from '../presenters/home-presenter.js';
 import './story-item.js';
+import { pushNotificationService } from '../utils/push-notification.js';
 
 const HomePage = {
   async render() {
     return `
       <div class="page-container">
+        <div class="notification-settings">
+          <h2>Notification Settings</h2>
+          <button id="enable-notification" class="button">Subscribe Push Notifications</button>
+          <button id="disable-notification" class="button" style="display: none;">Unsubscribe Push Notifications</button>
+          <p id="notification-status"></p>
+        </div>
         <h2>Daftar Cerita</h2>
         <div class="story-list" id="story-list"></div>
         <div id="map" style="width: 100%; height: 400px;"></div>
@@ -41,10 +48,56 @@ const HomePage = {
         });
       }
 
-      // Tampilkan pesan offline jika tidak ada koneksi
       if (!navigator.onLine) {
         offlineMsg.style.display = 'block';
       }
+
+      const enableButton = document.getElementById('enable-notification');
+      const disableButton = document.getElementById('disable-notification');
+      const statusText = document.getElementById('notification-status');
+
+      const isSupported = await pushNotificationService.init();
+      if (!isSupported) {
+        statusText.textContent = 'Push notifications are not supported in your browser';
+        enableButton.style.display = 'none';
+        return;
+      }
+
+      const subscription = await pushNotificationService.serviceWorkerRegistration.pushManager.getSubscription();
+      if (subscription) {
+        enableButton.style.display = 'none';
+        disableButton.style.display = 'block';
+        statusText.textContent = 'Push notifications are enabled';
+      }
+
+      enableButton.addEventListener('click', async () => {
+        try {
+          const permissionGranted = await pushNotificationService.requestNotificationPermission();
+          if (permissionGranted) {
+            await pushNotificationService.subscribeToPushNotification();
+            enableButton.style.display = 'none';
+            disableButton.style.display = 'block';
+            statusText.textContent = 'Push notifications are enabled';
+          } else {
+            statusText.textContent = 'Permission denied for push notifications';
+          }
+        } catch (error) {
+          console.error('Error enabling push notifications:', error);
+          statusText.textContent = 'Error enabling push notifications';
+        }
+      });
+
+      disableButton.addEventListener('click', async () => {
+        try {
+          await pushNotificationService.unsubscribeFromPushNotification();
+          enableButton.style.display = 'block';
+          disableButton.style.display = 'none';
+          statusText.textContent = 'Push notifications are disabled';
+        } catch (error) {
+          console.error('Error disabling push notifications:', error);
+          statusText.textContent = 'Error disabling push notifications';
+        }
+      });
     } catch (error) {
       console.error('Error in HomePage afterRender:', error);
       document.getElementById('story-list').innerHTML = '<p style="text-align:center; color:#e74c3c;">Gagal memuat cerita. Cek koneksi internet kamu.</p>';

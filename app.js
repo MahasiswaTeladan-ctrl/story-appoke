@@ -5,7 +5,6 @@ import 'leaflet/dist/leaflet.css';
 import Auth from './src/utils/auth.js';
 import AppShell from './src/views/app-shell.js';
 
-// Render Application Shell sekali saja
 if (!document.getElementById('main-content')) {
   document.body.innerHTML = AppShell.render();
 }
@@ -93,5 +92,4 @@ async function renderPage() {
 }
 
 window.addEventListener('hashchange', renderPage);
-// Panggil renderPage setelah shell benar-benar ada di DOM
 requestAnimationFrame(renderPage);

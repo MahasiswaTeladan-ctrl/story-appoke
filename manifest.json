@@ -1,19 +1,19 @@
 {
     "name": "Story App",
     "short_name": "StoryApp",
-    "start_url": "/storyApp_3/",
+    "start_url": "/story-appoke/",
     "display": "standalone",
     "background_color": "#4a90e2",
     "theme_color": "#4a90e2",
     "description": "Aplikasi berbagi cerita dengan fitur offline.",
     "icons": [
       {
-        "src": "/storyApp_3/icons/icon-192x192.png",
+        "src": "/story-appoke/icons/icon-192x192.png",
         "sizes": "192x192",
         "type": "image/png"
       },
       {
-        "src": "/storyApp_3/icons/icon-512x512.png",
+        "src": "/story-appoke/icons/icon-512x512.png",
         "sizes": "512x512",
         "type": "image/png"
       }
